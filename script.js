@@ -3,7 +3,7 @@ const btnContainer = document.querySelector('.button-container');
 const gridContainer = document.querySelector('.grid-container');
 const colorPicker = document.querySelector('input')
 const changeGridSize = document.createElement('button');
-changeGridSize.textContent = 'Change grid size'
+changeGridSize.textContent = 'Grid size'
 changeGridSize.type = 'button';
 changeGridSize.setAttribute('id', 'changeGrid')
 btnContainer.appendChild(changeGridSize);
@@ -20,6 +20,11 @@ randomColor.type = 'button';
 randomColor.setAttribute('id', 'randomColor')
 btnContainer.appendChild(randomColor);
 
+const clear = document.createElement('button');
+clear.textContent = 'Clear'
+clear.type = 'button';
+clear.setAttribute('id', 'clear')
+btnContainer.appendChild(clear);
 
 createGrid();
 rgbPicker();
@@ -31,7 +36,7 @@ container.addEventListener('click', (event)=>{
     case 'changeGrid':
         gridContainer.innerHTML ='';
         let gridSize = prompt('Enter grid size, Max grid 64x64', '32');
-        while(gridSize > 64){
+        while(gridSize > 64 || gridSize == '' || gridSize == 0){
           alert('Pick a number < 64');
           gridSize = prompt('Enter grid size, MAX 64x64', '32'); 
         }
@@ -43,6 +48,9 @@ container.addEventListener('click', (event)=>{
     break;
     case 'randomColor':
       rgbColor();
+    break;
+    case 'clear':
+      clearAllColor();
     break;
   }
 });
@@ -78,4 +86,11 @@ function rgbColor(){
     e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
     });
   });
+}
+
+function clearAllColor(){
+  const gridDivs = document.querySelectorAll('.grid-container div');
+  gridDivs.forEach((element)=>{
+    element.style.backgroundColor = 'white';
+    });
 }

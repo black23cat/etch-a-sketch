@@ -8,8 +8,22 @@ changeGridSize.type = 'button';
 changeGridSize.setAttribute('id', 'changeGrid')
 btnContainer.appendChild(changeGridSize);
 
+const defaultColor = document.createElement('button');
+defaultColor.textContent = 'Default Color'
+defaultColor.type = 'button';
+defaultColor.setAttribute('id', 'defaultColor')
+btnContainer.appendChild(defaultColor);
+
+const randomColor = document.createElement('button');
+randomColor.textContent = 'Random Color'
+randomColor.type = 'button';
+randomColor.setAttribute('id', 'randomColor')
+btnContainer.appendChild(randomColor);
+
+
 createGrid();
-defaultColor();
+rgbPicker();
+
 container.addEventListener('click', (event)=>{
   let target = event.target;
 
@@ -22,16 +36,18 @@ container.addEventListener('click', (event)=>{
           gridSize = prompt('Enter grid size, MAX 64x64', '32'); 
         }
         createGrid(gridSize);
-        defaultColor();
+        rgbPicker();
     break;
-    case 'colorPicker':
-        defaultColor();
+    case 'defaultColor':
+        rgbPicker();
     break;
-    
+    case 'randomColor':
+      rgbColor();
+    break;
   }
 });
 
-function defaultColor(){
+function rgbPicker(){
   const gridDivs = document.querySelectorAll('.grid-container div');
   gridDivs.forEach((element)=>{
       element.addEventListener('mouseover', function(e) {
@@ -50,4 +66,16 @@ function createGrid(gridSize=16){
       gridContainer.appendChild(div);
     }
   }
+}
+
+function rgbColor(){
+  const gridDivs = document.querySelectorAll('.grid-container div');
+  gridDivs.forEach((element)=>{
+    element.addEventListener('mouseover', function(e) {
+    const r = Math.floor(Math.random() * 255 + 1);
+    const g = Math.floor(Math.random() * 255 + 1);
+    const b = Math.floor(Math.random() * 255 + 1);
+    e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+    });
+  });
 }

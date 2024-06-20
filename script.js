@@ -2,6 +2,34 @@ const container = document.querySelector('.container');
 const btnContainer = document.querySelector('.button-container');
 const gridContainer = document.querySelector('.grid-container');
 const colorPicker = document.querySelector('input')
+const changeGridSize = document.createElement('button');
+changeGridSize.textContent = 'Change grid size'
+changeGridSize.type = 'button';
+changeGridSize.setAttribute('id', 'changeGrid')
+btnContainer.appendChild(changeGridSize);
+
+createGrid();
+defaultColor();
+container.addEventListener('click', (event)=>{
+  let target = event.target;
+
+  switch(target.id){
+    case 'changeGrid':
+        gridContainer.innerHTML ='';
+        let gridSize = prompt('Enter grid size, Max grid 64x64', '32');
+        while(gridSize > 64){
+          alert('Pick a number < 64');
+          gridSize = prompt('Enter grid size, MAX 64x64', '32'); 
+        }
+        createGrid(gridSize);
+        defaultColor();
+    break;
+    case 'colorPicker':
+        defaultColor();
+    break;
+    
+  }
+});
 
 function defaultColor(){
   const gridDivs = document.querySelectorAll('.grid-container div');
@@ -23,6 +51,3 @@ function createGrid(gridSize=16){
     }
   }
 }
-
-createGrid();
-defaultColor();

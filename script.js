@@ -1,12 +1,13 @@
 const container = document.querySelector('.container');
 const btnContainer = document.querySelector('.button-container');
 const gridContainer = document.querySelector('.grid-container');
+const colorPicker = document.querySelector('input')
 
 function defaultColor(){
   const gridDivs = document.querySelectorAll('.grid-container div');
   gridDivs.forEach((element)=>{
       element.addEventListener('mouseover', function(e) {
-        e.target.style.backgroundColor = 'limegreen';
+        e.target.style.backgroundColor = `${colorPicker.value}`;
     });
   })
 }

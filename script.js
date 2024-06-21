@@ -1,7 +1,15 @@
 const container = document.querySelector('.container');
 const btnContainer = document.querySelector('.button-container');
 const gridContainer = document.querySelector('.grid-container');
-const colorPicker = document.querySelector('input')
+const colorPicker = document.querySelector('input');
+const para = document.querySelector('.gridStatus');
+const gridOnOff = document.createElement('button');
+gridOnOff.textContent = 'Grid ON/OFF'
+gridOnOff.type = 'button';
+gridOnOff.setAttribute('id', 'gridOnOff')
+btnContainer.appendChild(gridOnOff);
+
+
 const changeGridSize = document.createElement('button');
 changeGridSize.textContent = 'Grid size'
 changeGridSize.type = 'button';
@@ -28,6 +36,21 @@ btnContainer.appendChild(clear);
 
 createGrid();
 rgbPicker();
+
+gridOnOff.addEventListener('click', ()=>{
+  const gridDivs = document.querySelectorAll('.grid-container div');
+  gridDivs.forEach((element)=>{
+    element.classList.toggle('grid');
+  })
+  if(!gridDivs[1].classList.contains('grid')){
+    para.textContent= 'Grid OFF';
+  }else{
+    para.textContent= 'Grid ON';
+  }
+});
+    
+
+
 
 container.addEventListener('click', (event)=>{
   let target = event.target;

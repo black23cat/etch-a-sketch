@@ -75,6 +75,9 @@ container.addEventListener('click', (event)=>{
     case 'clear':
       clearAllColor();
     break;
+    case 'favcolor':
+      rgbPicker()
+    break;
   }
 });
 

@@ -9,18 +9,17 @@ gridOnOff.type = 'button';
 gridOnOff.setAttribute('id', 'gridOnOff')
 btnContainer.appendChild(gridOnOff);
 
-
 const changeGridSize = document.createElement('button');
 changeGridSize.textContent = 'Grid size'
 changeGridSize.type = 'button';
 changeGridSize.setAttribute('id', 'changeGrid')
 btnContainer.appendChild(changeGridSize);
 
-const defaultColor = document.createElement('button');
-defaultColor.textContent = 'Default Color'
-defaultColor.type = 'button';
-defaultColor.setAttribute('id', 'defaultColor')
-btnContainer.appendChild(defaultColor);
+const eraser = document.createElement('button');
+eraser.textContent = 'Eraser'
+eraser.type = 'button';
+eraser.setAttribute('id', 'eraser')
+btnContainer.appendChild(eraser);
 
 const randomColor = document.createElement('button');
 randomColor.textContent = 'Random Color'
@@ -49,9 +48,6 @@ gridOnOff.addEventListener('click', ()=>{
   }
 });
     
-
-
-
 container.addEventListener('click', (event)=>{
   let target = event.target;
 
@@ -66,17 +62,17 @@ container.addEventListener('click', (event)=>{
         createGrid(gridSize);
         rgbPicker();
     break;
-    case 'defaultColor':
-        rgbPicker();
+    case 'eraser':
+        erase();
     break;
     case 'randomColor':
-      rgbColor();
+        rgbColor();
     break;
     case 'clear':
-      clearAllColor();
+       clearAllColor();
     break;
     case 'favcolor':
-      rgbPicker()
+        rgbPicker()
     break;
   }
 });
@@ -119,4 +115,13 @@ function clearAllColor(){
   gridDivs.forEach((element)=>{
     element.style.backgroundColor = 'white';
     });
+}
+
+function erase(){
+  const gridDivs = document.querySelectorAll('.grid-container div');
+  gridDivs.forEach((element)=>{
+      element.addEventListener('mouseover', function(e) {
+        e.target.style.backgroundColor = 'rgb(255, 255, 255)';
+    });
+  })
 }

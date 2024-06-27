@@ -30,6 +30,7 @@ img{
 }
 
 .grid-container{
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-wrap: wrap;
     width: 610px;
@@ -44,6 +45,7 @@ img{
 
 .grid{
     border: 1px solid #e6e6e6;
+    border-radius: 2px;
 }
 
 p{

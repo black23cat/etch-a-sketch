@@ -48,7 +48,8 @@ gridOnOff.addEventListener('click', ()=>{
   }
 });
     
-container.addEventListener('click', (event)=>{
+container.addEventListener('click', (event)=>{  
+  const gridDivs = document.querySelectorAll('.grid-container div');
   let target = event.target;
 
   switch(target.id){
@@ -63,28 +64,32 @@ container.addEventListener('click', (event)=>{
         rgbPicker();
     break;
     case 'eraser':
-        erase();
+        gridDivs.forEach((element)=>{
+          element.addEventListener('mouseover', function(e) {
+            e.target.style.backgroundColor = 'rgb(255, 255, 255)';
+          });
+        });
     break;
     case 'randomColor':
-        rgbColor();
+        gridDivs.forEach((element)=>{
+          element.addEventListener('mouseover', function(e) {
+            const r = Math.floor(Math.random() * 255 + 1);
+            const g = Math.floor(Math.random() * 255 + 1);
+            const b = Math.floor(Math.random() * 255 + 1);
+            e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
+          });
+        });
     break;
     case 'clear':
-       clearAllColor();
+        gridDivs.forEach((element)=>{
+          element.style.backgroundColor = 'white';
+        });
     break;
     case 'favcolor':
         rgbPicker()
     break;
   }
 });
-
-function rgbPicker(){
-  const gridDivs = document.querySelectorAll('.grid-container div');
-  gridDivs.forEach((element)=>{
-      element.addEventListener('mouseover', function(e) {
-        e.target.style.backgroundColor = `${colorPicker.value}`;
-    });
-  })
-}
 
 function createGrid(gridSize=16){
   for(let i = 0; i < gridSize; i++){
@@ -98,30 +103,11 @@ function createGrid(gridSize=16){
   }
 }
 
-function rgbColor(){
-  const gridDivs = document.querySelectorAll('.grid-container div');
-  gridDivs.forEach((element)=>{
-    element.addEventListener('mouseover', function(e) {
-    const r = Math.floor(Math.random() * 255 + 1);
-    const g = Math.floor(Math.random() * 255 + 1);
-    const b = Math.floor(Math.random() * 255 + 1);
-    e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b}`;
-    });
-  });
-}
-
-function clearAllColor(){
-  const gridDivs = document.querySelectorAll('.grid-container div');
-  gridDivs.forEach((element)=>{
-    element.style.backgroundColor = 'white';
-    });
-}
-
-function erase(){
+function rgbPicker(){
   const gridDivs = document.querySelectorAll('.grid-container div');
   gridDivs.forEach((element)=>{
       element.addEventListener('mouseover', function(e) {
-        e.target.style.backgroundColor = 'rgb(255, 255, 255)';
+        e.target.style.backgroundColor = `${colorPicker.value}`;
     });
   })
 }
